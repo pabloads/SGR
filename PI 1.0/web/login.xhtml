@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>PI 1.0</title>
+        <style type="text/css">
+            body {background-color: #eeeeee; font-size: 12px}            
+            .ui-panelgrid td, .ui-panelgrid tr {border-style: none !important}
+        </style> 
+        
+    </h:head>
+    <h:body>
+        <div style="vertical-align: central; alignment-adjust: middle"  align="center">
+            <p:layout style="min-width:400px;max-width:400px;min-height:120px">
+                <p:layoutUnit position="center" size="1000">
+                    <h:form>
+                        <p:panelGrid columns="2">
+                            <h:outputLabel  value="Login:"/>
+                            <p:inputText required="true" requiredMessage="Digite o nome de usuário" label="login" 
+                                         value="#{loginMB.funcionarioLogado.nome}"/>
+
+                            <h:outputLabel  value="Senha"/>
+                            <p:password required="true" requiredMessage="Digite uma senha" label="senha" 
+                                        value="#{loginMB.funcionarioLogado.cpf}"/>
+                            <p:commandButton value="Entrar" action="#{loginMB.logar()}" ajax="false"/>
+                        </p:panelGrid>
+
+                    </h:form>
+                </p:layoutUnit>
+            </p:layout>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"    
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">  
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Restaurante 1.1</title>
+        <style type="text/css">
+            body {                 
+                background-color: coral;
+                font-size: 12px;                
+            }
+            .ui-layout-unit, .ui-layout-unit-content { border: none;}
+            .ui-panelgrid td, .ui-panelgrid tr {border-style: none !important}
+
+            .ui-menubar, .ui-menu {                
+                border-style: none !important                    
+            }
+            
+
+        </style> 
+    </h:head>
+    <h:body style="background-image: url(../img/bg.png)" >
+        <div align="center">
+            <p:layout style="min-width:800px;max-width:800px;min-height:900px">
+               
+
+                <!-- cabeçalho -->
+
+                <p:layoutUnit position="north" size="200" >
+                     
+
+                    <h:form style="overflow: hidden">
+                        <p:menubar style="background-image: url(../img/banner.png); min-width: 800px;max-width: 800px;min-height: 180px;max-height: 180px">
+                            <p:menuitem value="Início" url="index.xhtml"/>
+                            <p:menuitem value="Clientes"  url="/faces/view/consulta_cliente.xhtml"/>
+                            <p:menuitem value="Funcionários" url="/faces/view/consulta_funcionario.xhtml"/>
+                            <p:menuitem value="Atendimento" url="/faces/view/atendimento.xhtml"/>                            
+                            <p:menuitem value="Sair" action="#{loginMB.logout()}" ajax="false" />
+                        </p:menubar>  
+                    </h:form>
+                </p:layoutUnit> 
+
+                <!-- Rodape-->
+
+                <p:layoutUnit position="south" size="50">  
+                    Restaurante Baiano 1.1
+                </p:layoutUnit>  
+
+                <!-- Corpo -->
+
+                <p:layoutUnit position="center">  
+                    <ui:insert name="centro">
+
+                    </ui:insert>
+                </p:layoutUnit>  
+            </p:layout>  
+        </div>
+    </h:body>
+</html>  
