@@ -12,7 +12,7 @@ and open the template in the editor.
 
     <ui:composition template="template.xhtml">
         <ui:define name="centro">
-            <p:panel header="Consulta de Funcionario" style="text-align: center; border: 0px"><br/>
+            <p:panel header="Funcionarios" style="text-align: center; border: 0px"><br/>
 
 
                 <!-- Dialog e cadastrp de usuario -->
@@ -81,49 +81,89 @@ and open the template in the editor.
                             <p:commandButton icon="ui-icon-search" title="Ver" update=":formV:dlgF" oncomplete="dlgVisualizar.show();">
                                 <f:setPropertyActionListener target="#{funcionarioMB.funcionarioSelecionado}" value="#{funcionario}"/>
                             </p:commandButton>
+                            <p:commandButton icon="ui-icon-pencil" title="Editar" update=":formEditarFuncionario:dlgEditarF" oncomplete="dlgEditarFuncionario.show();">
+                                <f:setPropertyActionListener target="#{funcionarioMB.funcionarioSelecionado}" value="#{funcionario}"/>
+                            </p:commandButton>
 
+                            <p:commandButton  icon="ui-icon-trash" title="Apagar" ajax="false" update="tabela" actionListener="#{funcionarioMB.deletarFuncionario(funcionario)}"/>
                         </p:column>
-
-
                     </p:dataTable>
                 </h:form>
 
-                <h:form id="formV" prependId="false">
-                    <p:dialog widgetVar="dlgVisualizar" header="Funcionário" resizable="false" closable="true" id="dlgF">
+                <h:form id="formV">
+                    <p:dialog widgetVar="dlgVisualizar" header="Funcionário" resizable="false" closable="true" id="dlgF" style="text-align:left">
                         <p:panelGrid columns="2" style="margin-bottom:10px" id="idD">
-                            <h:outputText value="Nome"/>
+                            <h:outputText value="Nome: "/>
                             <h:outputText value="#{funcionarioMB.funcionarioSelecionado.nome}"/>
 
-                            <h:outputText value="CPF"/>
+                            <h:outputText value="CPF: "/>
                             <h:outputText value="#{funcionarioMB.funcionarioSelecionado.cpf}"/>
 
-                            <h:outputText value="RG"/>
+                            <h:outputText value="RG: "/>
                             <h:outputText value="#{funcionarioMB.funcionarioSelecionado.rg}"/>
 
-                            <h:outputText value="Data de Nascimento"/>
+                            <h:outputText value="Data de Nascimento: "/>
                             <h:outputText value="#{funcionarioMB.funcionarioSelecionado.dataNascimento}"/>
 
-                            <h:outputText value="Situação Civil"/>
+                            <h:outputText value="Situação Civil: "/>
                             <h:outputText value="#{funcionarioMB.funcionarioSelecionado.situacaoCivil}"/>
 
-                            <h:outputText value="CTPS"/>
+                            <h:outputText value="CTPS: "/>
                             <h:outputText value="#{funcionarioMB.funcionarioSelecionado.ctps}"/>
 
-                            <h:outputText value="Cidade"/>
+                            <h:outputText value="Cidade: "/>
                             <h:outputText value="#{funcionarioMB.funcionarioSelecionado.cidade}"/>
 
-                            <h:outputText value="Bairro"/>
+                            <h:outputText value="Bairro: "/>
                             <h:outputText value="#{funcionarioMB.funcionarioSelecionado.bairro}"/>
 
-                            <h:outputText value="Rua"/>
+                            <h:outputText value="Rua: "/>
                             <h:outputText value="#{funcionarioMB.funcionarioSelecionado.rua}"/>
 
-                            <h:outputText value="Número"/>
+                            <h:outputText value="Número: " />
                             <h:outputText value="#{funcionarioMB.funcionarioSelecionado.numero}"/>
-
-
                         </p:panelGrid>
+                    </p:dialog>
+                </h:form>
 
+                <!-- Dialgo editar funcionario -->
+                <h:form id="formEditarFuncionario">
+                    <p:dialog widgetVar="dlgEditarFuncionario" header="Funcionário" resizable="false" closable="true" id="dlgEditarF" style="text-align:left">
+                        <p:panelGrid columns="2" style="margin-bottom:10px">
+                            <h:outputText value="Nome: "/>
+                            <p:inputText value="#{funcionarioMB.funcionarioSelecionado.nome}"/>
+
+                            <h:outputText value="CPF: "/>
+                            <p:inputText value="#{funcionarioMB.funcionarioSelecionado.cpf}"/>
+
+                            <h:outputText value="RG: "/>
+                            <p:inputText value="#{funcionarioMB.funcionarioSelecionado.rg}"/>
+
+                            <h:outputText value="Data de Nascimento: "/>
+                            <p:inputText value="#{funcionarioMB.funcionarioSelecionado.dataNascimento}" >
+                                <f:convertDateTime pattern="dd/MM/yyy"></f:convertDateTime>
+                            </p:inputText>
+
+                            <h:outputText value="Situação Civil: "/>
+                            <p:inputText value="#{funcionarioMB.funcionarioSelecionado.situacaoCivil}"/>
+
+                            <h:outputText value="CTPS: "/>
+                            <p:inputText value="#{funcionarioMB.funcionarioSelecionado.ctps}"/>
+
+                            <h:outputText value="Cidade: "/>
+                            <p:inputText value="#{funcionarioMB.funcionarioSelecionado.cidade}"/>
+
+                            <h:outputText value="Bairro: "/>
+                            <p:inputText value="#{funcionarioMB.funcionarioSelecionado.bairro}"/>
+
+                            <h:outputText value="Rua: "/>
+                            <p:inputText value="#{funcionarioMB.funcionarioSelecionado.rua}"/>
+
+                            <h:outputText value="Número: " />
+                            <p:inputText value="#{funcionarioMB.funcionarioSelecionado.numero}"/>
+                        </p:panelGrid>
+                        <h:commandButton value="Salvar" actionListener="#{funcionarioMB.alterarFuncionario()}" />
+                        <h:commandButton value="Cancelar" onclick="dlgEditarFuncionario.hide();"/>
                     </p:dialog>
                 </h:form>
             </p:panel>
