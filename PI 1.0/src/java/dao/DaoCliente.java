@@ -9,6 +9,7 @@ import modelo.Cliente;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 
 /**
@@ -26,7 +27,6 @@ public class DaoCliente {
         trans = sessao.beginTransaction();
         sessao.save(cliente);
         trans.commit();
-        sessao.close();
         return true;
         } catch (Exception e){
             e.printStackTrace();
@@ -68,5 +68,12 @@ public class DaoCliente {
         sessao.close();
         return true;
 
+    }
+    public Cliente pesquisarClientePorNome(String nome){
+        sessao = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = sessao.createCriteria(Cliente.class);
+        cr.add(Restrictions.eq("nome", nome));
+        return (Cliente) cr.uniqueResult();
+        
     }
 }

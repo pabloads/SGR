@@ -23,19 +23,19 @@ public class DaoFuncionario {
     private Transaction trans;
 
     public boolean cadastrarFuncionario(Funcionario funcionario) {
-//        try {
+       try {
         sessao = HibernateUtil.getSessionFactory().openSession();
         trans = sessao.beginTransaction();
         sessao.save(funcionario);
         trans.commit();
         return true;
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        } 
-//        finally{
-//           sessao.close(); 
-//        }
-//        return false;
+        } catch (Exception e){
+            e.printStackTrace();
+        } 
+        finally{
+           sessao.close(); 
+        }
+        return false;
     }
 
     public List listarTudo() {

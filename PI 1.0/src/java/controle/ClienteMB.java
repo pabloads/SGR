@@ -25,6 +25,7 @@ public class ClienteMB {
     private DaoCliente daoCliente = new DaoCliente();
     private List<Cliente> listaCliente = new ArrayList<Cliente>();
     private Cliente clienteSelecionado = new Cliente();
+    private String pesquisa;
 
     
     public Cliente getCliente() {
@@ -60,6 +61,14 @@ public class ClienteMB {
     public void setClienteSelecionado(Cliente clienteSelecionado) {
         this.clienteSelecionado = clienteSelecionado;
     }
+
+    public String getPesquisa() {
+        return pesquisa;
+    }
+
+    public void setPesquisa(String pesquisa) {
+        this.pesquisa = pesquisa;
+    }
     
     
 
@@ -80,5 +89,10 @@ public class ClienteMB {
    
    public void alterarCliente(){
        daoCliente.alterarCliente(clienteSelecionado);
+   }
+   
+   public List<Cliente> pesquisarClientePorNome(){
+       
+       return listaCliente;
    }
 }
