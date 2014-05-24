@@ -26,44 +26,29 @@ public class ClienteMB {
     private List<Cliente> listaCliente = new ArrayList<Cliente>();
     private Cliente clienteSelecionado = new Cliente();
 
-    /**
-     * @return the cliente
-     */
+    
     public Cliente getCliente() {
         return cliente;
     }
 
-    /**
-     * @param cliente the cliente to set
-     */
+    
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    /**
-     * @return the daoCliente
-     */
+    
     public DaoCliente getDaoCliente() {
         return daoCliente;
     }
 
-    /**
-     * @param daoCliente the daoCliente to set
-     */
     public void setDaoCliente(DaoCliente daoCliente) {
         this.daoCliente = daoCliente;
     }
 
-    /**
-     * @return the listaCliente
-     */
     public List<Cliente> getListaCliente() {
         return listaCliente;
     }
 
-    /**
-     * @param listaCliente the listaCliente to set
-     */
     public void setListaCliente(List<Cliente> listaCliente) {
         this.listaCliente = listaCliente;
     }

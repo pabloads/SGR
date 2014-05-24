@@ -91,12 +91,9 @@ public class FuncionarioMB {
        daoFuncionario.removerFuncionanrio(funcionario);
    }
     
-//    public static void main(String[] args){
-//        FuncionarioMB f = new FuncionarioMB();
-//        
-//    }
-
-
-    
+   public void alterarFuncionario(){
+       daoFuncionario.alterarFuncionario(funcionarioSelecionado);
+       funcionarioSelecionado = null;
+   }
 }
 

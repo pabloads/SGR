@@ -18,12 +18,11 @@ import util.HibernateUtil;
  * @author mixplick
  */
 public class DaoFuncionario {
-    
+
     private Session sessao;
     private Transaction trans;
-    
-    
-    public boolean cadastrarFuncionario(Funcionario funcionario){
+
+    public boolean cadastrarFuncionario(Funcionario funcionario) {
 //        try {
         sessao = HibernateUtil.getSessionFactory().openSession();
         trans = sessao.beginTransaction();
@@ -38,13 +37,14 @@ public class DaoFuncionario {
 //        }
 //        return false;
     }
-    
-    public List listarTudo(){
+
+    public List listarTudo() {
         sessao = HibernateUtil.getSessionFactory().openSession();
         Criteria c = sessao.createCriteria(Funcionario.class);
         return c.list();
     }
-    public boolean removerFuncionanrio(Funcionario funcionario){
+
+    public boolean removerFuncionanrio(Funcionario funcionario) {
         sessao = HibernateUtil.getSessionFactory().openSession();
         trans = sessao.beginTransaction();
         sessao.delete(funcionario);
@@ -52,16 +52,24 @@ public class DaoFuncionario {
         sessao.close();
         return true;
     }
-    
-    public Funcionario buscaFuncionario(Funcionario funcionario ){
-            sessao = HibernateUtil.getSessionFactory().openSession();
-            Criteria cr = sessao.createCriteria(Funcionario.class);
-            cr.add(Restrictions.eq("nome", funcionario.getNome() ));
-            cr.add(Restrictions.eq("cpf", funcionario.getCpf()));
-            return (Funcionario) cr.uniqueResult();
-           
-            
-        }
 
-    
+    public Funcionario buscaFuncionario(Funcionario funcionario) {
+        sessao = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = sessao.createCriteria(Funcionario.class);
+        cr.add(Restrictions.eq("nome", funcionario.getNome()));
+        cr.add(Restrictions.eq("cpf", funcionario.getCpf()));
+        return (Funcionario) cr.uniqueResult();
+
+    }
+
+    public boolean alterarFuncionario(Funcionario funcionario) {
+
+        sessao = HibernateUtil.getSessionFactory().openSession();
+        trans = sessao.beginTransaction();
+        sessao.update(funcionario);
+        trans.commit();
+        sessao.close();
+        return true;
+
+    }
 }
