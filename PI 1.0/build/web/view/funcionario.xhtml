@@ -76,12 +76,17 @@ and open the template in the editor.
                         <p:column headerText="CPF">
                             <h:outputText value="#{funcionario.cpf}"/>
                         </p:column>
+<<<<<<< HEAD
                         
                         <p:column headerText="RG">
                             <h:outputText value="#{funcionario.rg}"/>
                         </p:column>
 
                         <p:column  headerText="Opções" style="width: 20%">
+=======
+
+                        <p:column >
+>>>>>>> 1ca8de40ebcb4c174b13cdd8efcca444f5dbbcaf
                             <p:commandButton icon="ui-icon-search" title="Ver" update=":formV:dlgF" oncomplete="dlgVisualizar.show();">
                                 <f:setPropertyActionListener target="#{funcionarioMB.funcionarioSelecionado}" value="#{funcionario}"/>
                             </p:commandButton>
@@ -166,7 +171,11 @@ and open the template in the editor.
                             <h:outputText value="Número: " />
                             <p:inputText value="#{funcionarioMB.funcionarioSelecionado.numero}"/>
                         </p:panelGrid>
+<<<<<<< HEAD
                         <h:commandButton value="Salvar" actionListener="#{funcionarioMB.alterarFuncionario()}"/>
+=======
+                        <h:commandButton value="Salvar" actionListener="#{funcionarioMB.alterarFuncionario()}" />
+>>>>>>> 1ca8de40ebcb4c174b13cdd8efcca444f5dbbcaf
                         <h:commandButton value="Cancelar" onclick="dlgEditarFuncionario.hide();"/>
                     </p:dialog>
                 </h:form>

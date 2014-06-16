@@ -12,7 +12,11 @@ and open the template in the editor.
 
     <ui:composition template="template.xhtml">
         <ui:define name="centro">
+<<<<<<< HEAD
             <p:panel header="Clientes" style="text-align: center; border: 0px"><br/>
+=======
+            <p:panel header="Consulta de Cliente" style="text-align: center; border: 0px"><br/>
+>>>>>>> 1ca8de40ebcb4c174b13cdd8efcca444f5dbbcaf
 
 
                 <!-- Dialog e cadastro de usuario -->
@@ -21,9 +25,15 @@ and open the template in the editor.
 
                     <h:form>
                         <h:panelGrid columns="3">  
+<<<<<<< HEAD
                             <p:inputText id="keyword" value="#{clienteMB.pesquisa}" required="true" label="Keyword" />  
                             <p:watermark for="keyword" value="Nome do Cliente" />  
                             <p:commandButton actionListener="#{clienteMB.pesquisarClientePorNome()}" value="Pesquisar" ajax="false" update="tabela"/> 
+=======
+                            <p:inputText id="keyword" value="#{watermarkBean.keyword}" required="true" label="Keyword" />  
+                            <p:watermark for="keyword" value="Nome do Cliente" />  
+                            <p:commandButton actionListener="#{watermarkBean.search}" value="Pesquisar" ajax="false" /> 
+>>>>>>> 1ca8de40ebcb4c174b13cdd8efcca444f5dbbcaf
                         </h:panelGrid>  
                     </h:form>
                     <br/>
@@ -68,8 +78,21 @@ and open the template in the editor.
                             <h:outputText value="#{cliente.rg}"/>
                         </p:column>
 
+<<<<<<< HEAD
                         <p:column headerText="Opções" style="width: 20%">
                             <p:commandButton icon="ui-icon-pencil" title="Editar" update=":formEditarCliente:dlgEditarC" oncomplete="dlgEditar.show();">
+=======
+                        <p:column headerText="Estado">  
+                            <h:outputText value="#{cliente.estado}"/>
+                        </p:column>
+
+                        <p:column headerText="Cidade">
+                            <h:outputText value="#{cliente.cidade}"/>
+                        </p:column>
+
+                        <p:column headerText="Opções">
+                            <p:commandButton icon="ui-icon-pencil" title="Editar" update="tabela" onclick="dlgEditar.show();">
+>>>>>>> 1ca8de40ebcb4c174b13cdd8efcca444f5dbbcaf
                                 <f:setPropertyActionListener target="#{clienteMB.clienteSelecionado}" value="#{cliente}"/>
                             </p:commandButton>
 
@@ -83,8 +106,13 @@ and open the template in the editor.
                 </h:form>
 
                 <!--                    Dialog editar cliente-->
+<<<<<<< HEAD
                 <h:form id="formEditarCliente">
                     <p:dialog widgetVar="dlgEditar" header="Editar Cliente" resizable="false" closable="false" id="dlgEditarC">
+=======
+                <p:dialog widgetVar="dlgEditar" header="Editar Cliente" resizable="false" closable="false">
+                    <h:form>
+>>>>>>> 1ca8de40ebcb4c174b13cdd8efcca444f5dbbcaf
                         <p:panelGrid columns="2" style="margin-bottom:10px" >
                             <h:outputText value="Nome"/>
                             <p:inputText   value="#{clienteMB.clienteSelecionado.nome}"/>
@@ -105,8 +133,13 @@ and open the template in the editor.
                         </p:panelGrid>
                         <h:commandButton value="Salvar" actionListener="#{clienteMB.alterarCliente()}" />
                         <h:commandButton value="Cancelar" onclick="dlgEditar.hide();"/>
+<<<<<<< HEAD
                     </p:dialog>
                 </h:form>
+=======
+                    </h:form>
+                </p:dialog>
+>>>>>>> 1ca8de40ebcb4c174b13cdd8efcca444f5dbbcaf
 
             </p:panel>
         </ui:define>
