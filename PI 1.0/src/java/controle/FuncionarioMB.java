@@ -14,8 +14,6 @@ import javax.faces.bean.SessionScoped;
 
 
 
-
-
 @SessionScoped 
 @ManagedBean(name = "funcionarioMB")
 public class FuncionarioMB {

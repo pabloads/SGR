@@ -1,31 +1,31 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package dao;
 
 import java.util.List;
-import modelo.Cliente;
+import modelo.Cardapio;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 
 /**
  *
- * @author mixplick
+ * @author Pablo Rocha
  */
-public class DaoCliente {
-
+public class DaoCardapio {
     private Session sessao;
     private Transaction trans;
 
-    public boolean cadastrarCliente(Cliente cliente) {
+    public boolean preencherCardapio(Cardapio cardapio) {
         try {
         sessao = HibernateUtil.getSessionFactory().openSession();
         trans = sessao.beginTransaction();
-        sessao.save(cliente);
+        sessao.save(cardapio);
         trans.commit();
         return true;
         } catch (Exception e){
@@ -36,11 +36,11 @@ public class DaoCliente {
         }
         return false;
     }
-
-    public List listarTudo() {
+    
+    public List listarProdutosDoCardapio() {
         try {
             sessao = HibernateUtil.getSessionFactory().openSession();
-            Criteria c = sessao.createCriteria(Cliente.class);
+            Criteria c = sessao.createCriteria(Cardapio.class);
             return c.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,38 +50,21 @@ public class DaoCliente {
         return null;
     }
 
-    public boolean removerCliente(Cliente cliente) {
+    public boolean deletarProduto(Cardapio cardapio) {
         sessao = HibernateUtil.getSessionFactory().openSession();
         trans = sessao.beginTransaction();
-        sessao.delete(cliente);
+        sessao.delete(cardapio);
         trans.commit();
         sessao.close();
         return true;
     }
 
-    public boolean alterarCliente(Cliente cliente) {
-
+    public boolean editarCaradapio(Cardapio cardapio) {
         sessao = HibernateUtil.getSessionFactory().openSession();
         trans = sessao.beginTransaction();
-        sessao.update(cliente);
+        sessao.update(cardapio);
         trans.commit();
         sessao.close();
         return true;
-
-    }
-    public Cliente pesquisarClientePorNome(String nome){
-        sessao = HibernateUtil.getSessionFactory().openSession();
-        Criteria cr = sessao.createCriteria(Cliente.class);
-        cr.add(Restrictions.eq("nome", nome));
-        return (Cliente) cr.uniqueResult();
-        
-    }
-    
-    public Cliente pesquisarClienteParaAtendimento(String nome){
-        sessao = HibernateUtil.getSessionFactory().openSession();
-        Criteria cr = sessao.createCriteria(Cliente.class);
-        cr.add(Restrictions.eq("nome", nome));
-        return (Cliente) cr.uniqueResult();
-        
     }
 }

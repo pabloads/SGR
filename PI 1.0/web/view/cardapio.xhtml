@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="template.xhtml">
+        <ui:define name="centro">
+            <p:panel header="Cardápio" style="text-align: center; border: 0px"><br/>
+
+                <div align="right">
+                    <p:commandButton id="showDialogButton" type="buton" value="Incluir Novo Produto" icon="ui-icon-plus" onclick="dlgPreencherCardapio.show();"/>
+                </div>
+                <br/>
+                
+                <h:message for="preencherCardapio"/>
+                <h:form id="preencherCardapio"> 
+                    <p:dialog widgetVar="dlgPreencherCardapio" header="Preencher Cardápio" resizable="false" 
+                              closable="true" id="dlgPrencher" style="text-align:left">
+                        <p:panelGrid columns="2" style="margin-bottom:10px">
+                            <h:outputText value="Produto: "/>
+                            <p:inputText value="#{cardapioMB.cardapio.produto}"/>
+
+                            <h:outputText value="Qantidade: "/>
+                            <p:inputText value="#{cardapioMB.cardapio.quantidade}"/>
+
+                            <h:outputText value="Valor: "/>
+                            <p:inputText value="#{cardapioMB.cardapio.valor}"/>
+
+                            <p:commandButton value="Cadastar" actionListener="#{cardapioMB.preencherCardapio()}" ajax="false" update="msg"/>
+                            <p:commandButton value="Cancelar" onclick="dlgPreencherCardapio.hide()"/>
+                        </p:panelGrid>
+                    </p:dialog>
+                </h:form>
+                
+                    
+                
+                <h:form>
+                    <p:dataTable var="cardapio" value="#{cardapioMB.listarProdutosDoCardapio()}" id="tabela">
+                        <p:column headerText="Produto">
+                            <h:outputText value="#{cardapio.produto}"/>
+                        </p:column> 
+
+                        <p:column headerText="Quantidade">
+                            <h:outputText value="#{cardapio.quantidade}"/>
+                        </p:column> 
+
+                        <p:column headerText="Valor">
+                            <h:outputText value="#{cardapio.valor}"/>
+                        </p:column> 
+
+                        <p:column headerText="Opções">
+                            <p:commandButton icon="ui-icon-search" title="Ver" update=":formCardapio:dlgVisualizar" oncomplete="dlgVisualizarCardapio.show();">
+                                <f:setPropertyActionListener target="#{cardapioMB.produtoSelecionado}" value="#{cardapio}"/>
+                            </p:commandButton>  
+                            <p:commandButton icon="ui-icon-pencil" title="Editar" update=":formEditarCardapio:dlgEditarC"  oncomplete="dlgEditarCardapio.show();">
+                                <f:setPropertyActionListener target="#{cardapioMB.produtoSelecionado}" value="#{cardapio}"/>
+                            </p:commandButton>
+
+                            <p:commandButton  icon="ui-icon-trash" title="Apagar" ajax="false" update="tabela" actionListener="#{cardapioMB.deletarProduto(cardapio)}"/>
+                        </p:column> 
+                    </p:dataTable>
+                </h:form>
+                
+                <h:form id="formCardapio">
+                    <p:dialog widgetVar="dlgVisualizarCardapio" header="Cardápio" resizable="false" 
+                              closable="true" id="dlgVisualizar" style="text-align:left">
+                        <p:panelGrid columns="2" style="margin-bottom:10px">
+                            <h:outputText value="Produto: "/>
+                            <h:outputText value="#{cardapioMB.produtoSelecionado.produto}"/>
+
+                            <h:outputText value="Qantidade: "/>
+                            <h:outputText value="#{cardapioMB.produtoSelecionado.quantidade}"/>
+
+                            <h:outputText value="Valor: "/>
+                            <h:outputText value="#{cardapioMB.produtoSelecionado.valor}"/>
+                        </p:panelGrid>
+
+                    </p:dialog>
+                </h:form>
+                
+                <h:form id="formEditarCardapio">
+                        <p:dialog widgetVar="dlgEditarCardapio" header="Editar Cardápio" resizable="false" 
+                                  closable="true" id="dlgEditarC" style="text-align:left">
+                            <p:panelGrid columns="2" style="margin-bottom:10px">
+                                <h:outputText value="Produto: "/>
+                                <p:inputText value="#{cardapioMB.produtoSelecionado.produto}"/>
+
+                                <h:outputText value="Qantidade: "/>
+                                <p:inputText value="#{cardapioMB.produtoSelecionado.quantidade}"/>
+
+                                <h:outputText value="Valor: "/>
+                                <p:inputText value="#{cardapioMB.produtoSelecionado.valor}"/>
+
+                                <p:commandButton value="Salvar" ajax="false" actionListener="#{cardapioMB.editarCardapio()}"/>
+                                <p:commandButton value="Cancelar" onclick="dlgEditarCardapio.hide()"/>
+                            </p:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+            </p:panel>
+        </ui:define>
+    </ui:composition>   
+</html>
+

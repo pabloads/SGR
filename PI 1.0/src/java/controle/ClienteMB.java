@@ -10,34 +10,29 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+import modelo.Conta;
 
-/**
- *
- * @author mixplick
- */
-
-
-@ManagedBean (name = "clienteMB")
+@ManagedBean(name = "clienteMB")
 @SessionScoped
 public class ClienteMB {
-    
+
     private Cliente cliente = new Cliente();
     private DaoCliente daoCliente = new DaoCliente();
     private List<Cliente> listaCliente = new ArrayList<Cliente>();
     private Cliente clienteSelecionado = new Cliente();
+    private Cliente clienteAux = new Cliente();
     private String pesquisa;
 
-    
     public Cliente getCliente() {
         return cliente;
     }
 
-    
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    
     public DaoCliente getDaoCliente() {
         return daoCliente;
     }
@@ -69,30 +64,50 @@ public class ClienteMB {
     public void setPesquisa(String pesquisa) {
         this.pesquisa = pesquisa;
     }
-    
-    
 
-   public void cadastrarCliente(){
-       daoCliente.cadastrarCliente(cliente);
-       this.cliente = null;
-   }
-    
-   public List<Cliente> listar(){
-       listaCliente = daoCliente.listarTudo();
-       return listaCliente;
-   }
-   
-   public void deletarCliente(Cliente c){
-       this.cliente = c;
-       daoCliente.removerCliente(cliente);
-   }    
-   
-   public void alterarCliente(){
-       daoCliente.alterarCliente(clienteSelecionado);
-   }
-   
-   public List<Cliente> pesquisarClientePorNome(){
-       
-       return listaCliente;
-   }
+    public Cliente getClienteAux() {
+        return clienteAux;
+    }
+
+    public void setClienteAux(Cliente clienteAux) {
+        this.clienteAux = clienteAux;
+    }
+
+    public void cadastrarCliente() {
+        daoCliente.cadastrarCliente(cliente);
+        this.cliente = null;
+    }
+
+    public List<Cliente> listar() {
+        listaCliente = daoCliente.listarTudo();
+        return listaCliente;
+    }
+
+    public void deletarCliente(Cliente c) {
+        this.cliente = c;
+        daoCliente.removerCliente(cliente);
+    }
+
+    public void alterarCliente() {
+        daoCliente.alterarCliente(clienteSelecionado);
+    }
+
+    public List<Cliente> pesquisarClientePorNome() {
+
+        return listaCliente;
+    }
+
+    public Cliente pesquisarClienteParaAtendimento() {
+        clienteAux = null;
+        clienteAux = daoCliente.pesquisarClienteParaAtendimento(pesquisa);
+        return clienteAux;
+    }
+
+    public String abrirConta() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(true);
+        session.setAttribute("clienteAux", this.clienteAux);
+        return "/view/conta.xhtml";
+    }
+
 }

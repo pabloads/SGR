@@ -7,14 +7,47 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="template.xhtml">
         <ui:define name="centro">
-
-
-            <h3>Pagima em construnção</h3>
-
+            <p:panel header="Atendimento" style="text-align: center; border: 0px"><br/>
+                <h:form>
+                    <h:panelGrid columns="5">  
+                        <p:inputText id="keyword" value="#{clienteMB.pesquisa}" label="Keyword" />  
+                        <p:watermark for="keyword" value="Nome do Cliente" />  
+                        <p:commandButton actionListener="#{clienteMB.pesquisarClienteParaAtendimento()}" value="Pesquisar" ajax="false" update=":gridP:inputP"/>
+                        <div align="right">
+                            <p:commandButton type="buton" value="Cardápio" icon="ui-icon-folder-open" action="/faces/view/cardapio.xhtml" ajax="false"/>
+                    </div>
+                    </h:panelGrid> 
+                    <br/>
+                    <h:panelGrid columns="1" id="gridP">
+                        <h:outputText value="Cliente" id="inputP"/>
+                        <p:inputText value="#{clienteMB.clienteAux.nome}" readonly="true"/>
+                        <p:commandButton value="Abrir Conta" ajax="false" action="#{clienteMB.abrirConta()}"/>
+                    </h:panelGrid>
+                    <br/>
+                    <br/>
+                    <p:dataTable var="conta" value="#{contaMB.listarContas()}" id="tabelaConta" emptyMessage="Nenhuma conta aberta">
+                        <p:column headerText="Cliente">
+                            <h:outputText value="#{conta.clienteidCliente.nome}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Valor R$">
+                            <h:outputText value="#{conta.valor}"/>
+                        </p:column> 
+                        
+                        <p:column headerText="Opções">
+                            <p:commandButton value="Adicionar Pedido" action="#{clienteMB.abrirConta()}" ajax="false">
+                                <f:setPropertyActionListener target="#{contaMB.contaSelecionada}" value="#{conta}"/>
+                            </p:commandButton>
+                            <p:commandButton value="Fechar conta"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:panel>
         </ui:define>
     </ui:composition>
 </html>

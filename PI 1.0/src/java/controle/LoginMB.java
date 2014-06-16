@@ -41,7 +41,7 @@ public class LoginMB {
     }
 
     public String logar() {
-        if (funcionarioLogado.getNome().equals("saulo") && (funcionarioLogado.getCpf() == 1111)) {
+        if (funcionarioLogado.getNome().equals("adim") && (funcionarioLogado.getCpf() == 1234)) {
             HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             sessao.setAttribute("Pablo", funcionarioLogado);
 

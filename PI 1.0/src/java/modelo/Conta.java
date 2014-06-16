@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -46,6 +48,9 @@ public class Conta implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
     private Float valor;
+    @JoinColumn(name = "Cliente_idCliente", referencedColumnName = "idCliente")
+    @ManyToOne(optional = false)
+    private Cliente clienteidCliente;
 
     public Conta() {
     }
@@ -76,6 +81,14 @@ public class Conta implements Serializable {
 
     public void setValor(Float valor) {
         this.valor = valor;
+    }
+
+    public Cliente getClienteidCliente() {
+        return clienteidCliente;
+    }
+
+    public void setClienteidCliente(Cliente clienteidCliente) {
+        this.clienteidCliente = clienteidCliente;
     }
 
     @Override
